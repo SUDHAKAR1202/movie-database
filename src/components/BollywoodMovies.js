@@ -20,7 +20,7 @@ const bollywoodMovies = [
     genre: "Biography, Drama, Sport",
     year: 2016,
     director: "Nitesh Tiwari",
-    image: "http://hundia.hu/wp-content/uploads/2017/07/Dangal.jpg",
+    image: "https://data1.ibtimes.co.in/photo/en/full/53821/dangal-produced-by-aamir-khan-kiran-rao-siddharth-roy-kapur-under-disney-aamir-khan.jpg?w=764",
     cast: ["Aamir Khan", "Sakshi Tanwar", "Fatima Sana Shaikh"],
   },
   {
