@@ -20,7 +20,8 @@ const bollywoodMovies = [
     genre: "Biography, Drama, Sport",
     year: 2016,
     director: "Nitesh Tiwari",
-    image: "https://data1.ibtimes.co.in/photo/en/full/53821/dangal-produced-by-aamir-khan-kiran-rao-siddharth-roy-kapur-under-disney-aamir-khan.jpg?w=764",
+    image:
+      "https://pardesireviews.com/wp-content/uploads/2016/12/aamir-khan-dangal-movie-title-song-696x396.jpg",
     cast: ["Aamir Khan", "Sakshi Tanwar", "Fatima Sana Shaikh"],
   },
   {
@@ -51,7 +52,7 @@ const bollywoodMovies = [
     genre: "Biography, Drama, Music",
     year: 2019,
     director: "Zoya Akhtar",
-    image: "https://tanqeed.com/wp-content/uploads/2019/01/GullyBoy.jpg",
+    image: "https://cdn.dnaindia.com/sites/default/files/2019/01/01/772781-000-gully-boy.jpg?im=FitAndFill=(640,480)",
     cast: ["Ranveer Singh", "Neha Dhupia", "Tanay Chheda"],
   },
   {
@@ -62,7 +63,7 @@ const bollywoodMovies = [
     year: 2018,
     director: "Sriram Raghavan",
     image:
-      "https://akm-img-a-in.tosshub.com/indiatoday/images/photo_gallery/202409/andhadhun_imdb.jpg",
+      "https://www.india-forums.com/bollywood/images/uploads/A1C_an1.jpg",
     cast: ["Ayushmann Khurrana", "Tabu", "Radhika Apte"],
   },
 ];
@@ -89,23 +90,21 @@ function BollywoodMovies() {
     ),
   ];
 
-  const filteredMovies = movies
-    .filter((movie) => {
-      const searchLower = searchTerm.toLowerCase();
+  const filteredMovies = movies.filter((movie) => {
+    const searchLower = searchTerm.toLowerCase();
 
-      const matchesSearch =
-        movie.title.toLowerCase().includes(searchLower) ||
-        movie.genre.toLowerCase().includes(searchLower) ||
-        movie.director.toLowerCase().includes(searchLower) ||
-        movie.cast.some((actor) => actor.toLowerCase().includes(searchLower)) ||
-        movie.year.toString().includes(searchLower);
+    const matchesSearch =
+      movie.title.toLowerCase().includes(searchLower) ||
+      movie.genre.toLowerCase().includes(searchLower) ||
+      movie.director.toLowerCase().includes(searchLower) ||
+      movie.cast.some((actor) => actor.toLowerCase().includes(searchLower)) ||
+      movie.year.toString().includes(searchLower);
 
-      const matchesGenre =
-        selectedGenre === "All" || movie.genre.includes(selectedGenre);
+    const matchesGenre =
+      selectedGenre === "All" || movie.genre.includes(selectedGenre);
 
-      return matchesSearch && matchesGenre;
-    })
-    .filter((movie) => !favourites.some((fav) => fav.id === movie.id));
+    return matchesSearch && matchesGenre;
+  });
 
   const sortedAndFilteredMovies = filteredMovies.sort((a, b) => {
     switch (sortBy) {
@@ -211,9 +210,35 @@ function BollywoodMovies() {
 
                   <div className="movies-grid">
                     {groupedFavourites[genre].map((movie) => (
-                      <div className="movie-card" key={movie.id}>
-                        <img src={movie.image} alt={movie.title} />
-                        <h4>{movie.title}</h4>
+                      <div
+                        className={`movie-card ${getRatingCategory(movie.rating)}`}
+                        key={movie.id}
+                      >
+                        <img
+                          src={movie.image}
+                          alt={`${movie.title} poster`}
+                          className="movie-image"
+                        />
+
+                        <div className="movie-content">
+                          <h2 className="movie-title">{movie.title}</h2>
+                          <p className="movie-year">{movie.year}</p>
+                          <p className="movie-genre">{movie.genre}</p>
+                          <p className="movie-director">
+                            Director: {movie.director}
+                          </p>
+                          <p className="movie-cast">
+                            Cast: {movie.cast.join(", ")}
+                          </p>
+
+                          <div className="movie-footer">
+                            <div
+                              className={`movie-rating rating-${getRatingCategory(movie.rating)}`}
+                            >
+                              <p>Rating: {movie.rating}/10</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
